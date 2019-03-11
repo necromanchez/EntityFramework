@@ -1,0 +1,86 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+            .table th {
+                background-color: #F7F7F7;
+                color: #333;
+                font-weight: bold;
+            }
+
+            .table th, .table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+    </style>
+</head>
+<body>
+    <div ng-app="MyApp" ng-controller="MyController">
+        <table id="tblCustomers" class="table" cellpadding="0" cellspacing="0">
+            <tr>
+                <th style="width:100px">Customer Id</th>
+                <th style="width:150px">Name</th>
+                <th style="width:150px">Country</th>
+                <th style="width:100px"></th>
+            </tr>
+            <tbody ng-repeat="m in Customers">
+                <tr>
+                    <td><span>{{m.CustomerId}}</span></td>
+                    <td>
+                        <span ng-hide="m.EditMode">{{m.Name}}</span>
+                        <input type="text" ng-model="m.Name" ng-show="m.EditMode" />
+                    </td>
+                    <td>
+                        <span ng-hide="m.EditMode">{{m.Country}}</span>
+                        <input type="text" ng-model="m.Country" ng-show="m.EditMode" />
+                    </td>
+                    <td>
+                        <a class="Edit" href="javascript:;" ng-hide="m.EditMode" ng-click="Edit($index)">Edit</a>
+                        <a class="Update" href="javascript:;" ng-show="m.EditMode" ng-click="Update($index)">Update</a>
+                        <a class="Cancel" href="javascript:;" ng-show="m.EditMode" ng-click="Cancel($index)">Cancel</a>
+                        <a href="javascript:;" ng-hide="m.EditMode" ng-click="Delete(m.CustomerId)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="width: 150px">
+                    Name<br />
+                    <input type="text" ng-model="Name" style="width:140px" />
+                </td>
+                <td style="width: 150px">
+                    Country:<br />
+                    <input type="text" ng-model="Country" style="width:140px" />
+                </td>
+                <td style="width: 200px">
+                    <br />
+                    <input type="button" value="Add" ng-click="Add()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script src="~/Javascripts/Angularcrud.js"></script>
+</body>
+</html>
